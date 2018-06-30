@@ -1,4 +1,4 @@
-char original[6] = {'a', 't', 'c', 'g', 'g', 'a'};
+char original[6] = {'c', 'a', 'g', 'g', 'g', 'a'};
 char otherSide[6] = {};
 
 
@@ -12,6 +12,7 @@ void setup() {
 
     if (original[i] == 't') {
       otherSide[i] = 'a';
+      val++;
     }
 
     if (original[i] == 'c') {
