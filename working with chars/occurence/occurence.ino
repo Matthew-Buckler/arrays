@@ -5,6 +5,8 @@ int tCount = 0;
 int cCount = 0;
 int gCount = 0;
 
+
+
 void setup() {
   Serial.begin(9600);
 
@@ -35,20 +37,15 @@ void setup() {
   Serial.print("g: ");
   Serial.println(gCount);
 
-
-
-  /*
-    for (int i = 0; i < 6; i++) {
-      Serial.print(original[i]);
-      Serial.print("\t");
-      Serial.println(otherSide[i]);
+  int arr[4] = {aCount, tCount, cCount, gCount};
+  int biggestNumber = 0;
+  
+    for (int i = 0; i < 4; i++) {
+     if (arr[i] > biggestNumber) {
+      biggestNumber = arr[i]; 
     }
-
-    double WhoAmI = (val/totalCharsInt)*100;
-    Serial.print("a+t: ");
-    Serial.print(WhoAmI);
-    Serial.print("%");
-  */
+  }
+  Serial.println(biggestNumber);
 }
 
 
