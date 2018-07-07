@@ -19,6 +19,8 @@ int correctAttempt[5] = {5, 5, 5, 5, 5};
 int clickCount = 0;
 int correctCount = 0;
 
+bool rob = true;
+
 
 void setup() {
   Serial.begin(9600);
@@ -27,35 +29,28 @@ void setup() {
   Serial.println("- * = change password");
   Serial.println("- # = attempt");
   Serial.println("the firewall password is: 5,5,5,5,5");
+
 }
 
 
-bool rob = true;
 void loop() {
   char key = keypad.getKey();
-
-
-  if (key == '*') {
-    if (rob == true) {//we will get robbed! ah!
-      Serial.println("enter the correct password before changing");
-    }
-    else {
-      Serial.println("password changed");
-      Serial.println("your new password is:");
-
-      for (int i = 0; i < 5; i++) {
-
-        correctAttempt[i] = attempt[i];
-
-        Serial.println(correctAttempt[i]);
-      }
-    }
-  }
-
 
   if (key != NO_KEY && key != '*' && key != '#') {
     attempt[clickCount] = key - 48;
     clickCount++;
+
+    if (clickCount > 5) {
+      Serial.println("entered too many numbers");
+      Serial.println("clearing data...");
+      clearData();
+    }
+  }
+
+
+  if (key == '*') {
+    changePassword();
+    clearData();
   }
 
 
@@ -64,6 +59,25 @@ void loop() {
     clearData();
   }
 }
+
+
+
+void changePassword() {
+  if (rob == true) {//we will get robbed! ah!
+    Serial.println("enter the correct password before changing");
+  }
+  else {
+    Serial.println("password changed");
+    Serial.println("your new password is:");
+
+    for (int i = 0; i < 5; i++) {
+      correctAttempt[i] = attempt[i];
+
+      Serial.println(correctAttempt[i]);
+    }
+  }
+}
+
 
 
 void check() {
